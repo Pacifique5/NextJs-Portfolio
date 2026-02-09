@@ -8,78 +8,71 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaMobile, FaRobot, FaGraduationCap
 const projectsData = [
   {
     id: 1,
-    title: "AI Health Assistant",
-    description: "Intelligent symptom-to-treatment diagnostic tool with conversational AI for virtual health assistance and personalized diagnosis support.",
+    title: "Next Portfolio Website",
+    description: "A modern portfolio website built with Next.js and Tailwind CSS featuring smooth animations and responsive design.",
     image: "/images/projects/11.png",
-    tags: ["AI", "Python", "TensorFlow", "OpenAI"],
-    category: "AI",
-    icon: <FaRobot />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+    category: "Web",
+    icon: <FaCode />,
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
     featured: true,
-    stats: { users: "500+", accuracy: "92%" }
   },
   {
     id: 2,
-    title: "E-Record Management System",
-    description: "Secure platform for student data, grades, and reports with role-based access controls. Used by Mere du Verbe & Marie Merci Schools.",
+    title: "FARM PRO",
+    description: "A full-stack farm management system with inventory tracking, crop monitoring, and analytics dashboard.",
     image: "/images/projects/2.png",
-    tags: ["Next.js", "Nest.js", "MongoDB"],
+    tags: ["Laravel", "PHP", "MySQL"],
     category: "Web",
-    icon: <FaGraduationCap />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
-    featured: true,
-    stats: { schools: "2", students: "1000+" }
+    icon: <FaCode />,
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
   },
   {
     id: 3,
-    title: "CacheNet",
-    description: "Offline content caching platform for education. Web and mobile apps enabling students to access academic content during internet outages.",
-    image: "/images/projects/4.png",
-    tags: ["Next.js", "React Native", "Java", "Node.js"],
-    category: "Mobile",
-    icon: <FaMobile />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
-    featured: true,
-    stats: { downloads: "2K+", offline: "100%" }
+    title: "Library Management System",
+    description: "A comprehensive library management solution with book tracking, borrowing history, and admin panel.",
+    image: "/images/projects/3.png",
+    tags: ["Laravel", "PHP", "MySQL"],
+    category: "Web",
+    icon: <FaCode />,
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
   },
   {
     id: 4,
-    title: "Umurava Platform",
-    description: "Youth mentorship system supporting empowerment and leadership development with modern, intuitive interface.",
+    title: "CacheNet",
+    description: "A network caching solution enabling offline content access for education during internet outages.",
+    image: "/images/projects/4.png",
+    tags: ["Next.js", "React Native", "Node.js"],
+    category: "Mobile",
+    icon: <FaMobile />,
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
+    featured: true,
+  },
+  {
+    id: 5,
+    title: "Umurava-Website",
+    description: "Youth mentorship platform with authentication and CRUD operations supporting empowerment and leadership.",
     image: "/images/projects/12.png",
     tags: ["Next.js", "Tailwind CSS", "TypeScript"],
     category: "Web",
     icon: <FaCode />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
-    stats: { mentors: "50+", youth: "200+" }
-  },
-  {
-    id: 5,
-    title: "Igitego - Athlete Stats",
-    description: "Performance tracking system for athletes with comprehensive statistics, achievements, and progress visualization.",
-    image: "/images/projects/3.png",
-    tags: ["React", "Figma", "Chart.js"],
-    category: "Web",
-    icon: <FaCode />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
-    stats: { athletes: "100+", metrics: "15+" }
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
   },
   {
     id: 6,
-    title: "FARM PRO",
-    description: "Full-stack farm management system with inventory tracking, crop monitoring, and analytics dashboard.",
+    title: "Vehicle Management System",
+    description: "A complete vehicle management solution for tracking parking spaces, fees, and vehicle information.",
     image: "/images/projects/6.png",
-    tags: ["Laravel", "PHP", "MySQL"],
+    tags: ["HTML", "CSS", "PHP"],
     category: "Web",
     icon: <FaCode />,
-    gitUrl: "https://github.com/Pacifique5",
-    previewUrl: "#",
-    stats: { farms: "25+", crops: "50+" }
+    gitUrl: "https://github.com",
+    previewUrl: "https://github.com",
   },
 ];
 
@@ -167,18 +160,6 @@ const ProjectCard = ({ project, index }) => {
         <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
           {project.description}
         </p>
-
-        {/* Stats */}
-        {project.stats && (
-          <div className="flex gap-4 mb-4">
-            {Object.entries(project.stats).map(([key, value]) => (
-              <div key={key} className="text-center">
-                <div className="text-lg font-bold text-primary-600 dark:text-primary-400">{value}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 capitalize">{key}</div>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">

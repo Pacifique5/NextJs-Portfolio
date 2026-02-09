@@ -9,6 +9,7 @@ const navLinks = [
   { title: "Experience", path: "#experience" },
   { title: "Skills", path: "#skills" },
   { title: "Projects", path: "#projects" },
+  { title: "Testimonials", path: "#testimonials" },
   { title: "Contact", path: "#contact" },
 ];
 
@@ -82,10 +83,7 @@ const EnhancedNavbar = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/#home" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300">
-                MP
-              </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white hidden sm:block">
+              <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:scale-105 transition-transform duration-300">
                 Mugisha Pacifique
               </span>
             </Link>
@@ -114,7 +112,7 @@ const EnhancedNavbar = () => {
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+                className="text-3xl hover:scale-110 transition-transform duration-300"
                 aria-label="Toggle dark mode"
               >
                 <AnimatePresence mode="wait">
@@ -126,7 +124,7 @@ const EnhancedNavbar = () => {
                       exit={{ rotate: 90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <FaSun className="text-yellow-500 text-xl" />
+                      ☀️
                     </motion.div>
                   ) : (
                     <motion.div
@@ -136,7 +134,7 @@ const EnhancedNavbar = () => {
                       exit={{ rotate: -90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <FaMoon className="text-gray-700 text-xl" />
+                      🌙
                     </motion.div>
                   )}
                 </AnimatePresence>

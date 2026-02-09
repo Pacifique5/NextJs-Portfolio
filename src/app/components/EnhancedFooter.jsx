@@ -14,11 +14,8 @@ const EnhancedFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white font-bold text-xl">
-                MP
-              </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
+            <div className="mb-4">
+              <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500">
                 Mugisha Pacifique
               </span>
             </div>
@@ -32,7 +29,7 @@ const EnhancedFooter = () => {
           <div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {["Home", "Experience", "Skills", "Projects", "Contact"].map((link) => (
+              {["Home", "Experience", "Skills", "Projects", "Testimonials", "Contact"].map((link) => (
                 <li key={link}>
                   <a
                     href={`#${link.toLowerCase()}`}
