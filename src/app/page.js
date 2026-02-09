@@ -1,23 +1,32 @@
-import HeroSection from "./components/HeroSection";
-import Navbar from "./components/Navbar";
-import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
-import EmailSection from "./components/EmailSection";
-import Footer from "./components/Footer";
-import AchievementsSection from "./components/AchievementsSection";
+import EnhancedNavbar from "./components/EnhancedNavbar";
+import EnhancedHeroSection from "./components/EnhancedHeroSection";
+import ExperienceTimeline from "./components/ExperienceTimeline";
+import SkillsShowcase from "./components/SkillsShowcase";
+import EnhancedProjectsSection from "./components/EnhancedProjectsSection";
+import EnhancedContactSection from "./components/EnhancedContactSection";
+import EnhancedFooter from "./components/EnhancedFooter";
+import ParticleBackground from "./components/ParticleBackground";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-white dark:bg-[#121212] text-black dark:text-white">
-      <Navbar />
-      <div className="container mt-24 mx-auto px-12 py-4">
-        <HeroSection />
-        <AchievementsSection />
-        <AboutSection />
-        <ProjectsSection />
-        <EmailSection />
+    <main className="relative flex min-h-screen flex-col bg-white dark:bg-gray-900 text-black dark:text-white overflow-x-hidden">
+      <ParticleBackground />
+      <EnhancedNavbar />
+      
+      <div className="relative z-10">
+        <div id="home" className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <EnhancedHeroSection />
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <ExperienceTimeline />
+          <SkillsShowcase />
+          <EnhancedProjectsSection />
+          <EnhancedContactSection />
+        </div>
       </div>
-      <Footer />
+      
+      <EnhancedFooter />
     </main>
   );
 }
