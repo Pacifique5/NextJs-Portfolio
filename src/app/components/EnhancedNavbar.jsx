@@ -20,9 +20,10 @@ const EnhancedNavbar = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedMode);
-    if (savedMode) {
+    const savedMode = localStorage.getItem("darkMode");
+    const isDark = savedMode === null || savedMode === "true";
+    setDarkMode(isDark);
+    if (isDark) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");

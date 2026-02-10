@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const savedMode = localStorage.getItem('darkMode') === 'true';
-                if (savedMode) {
+                const savedMode = localStorage.getItem('darkMode');
+                if (savedMode === null || savedMode === 'true') {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');

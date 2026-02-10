@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowUp, FaEnvelope, FaGithub, FaLinkedin, FaPlus, FaTimes } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin, FaPlus, FaTimes, FaArrowUp } from "react-icons/fa";
 
 const FloatingActions = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ const FloatingActions = () => {
   const actions = [
     {
       icon: <FaArrowUp />,
-      label: "Back to Top",
+      label: "↑",
       onClick: scrollToTop,
       color: "from-primary-500 to-primary-600",
     },
