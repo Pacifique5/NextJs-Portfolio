@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaQuoteLeft, FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
+import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import Image from "next/image";
 
 const testimonials = [
@@ -11,7 +11,7 @@ const testimonials = [
     name: "John Doe",
     role: "Senior Developer at Tech Company",
     relationship: "Colleague",
-    image: "/images/7.png", // Replace with actual testimonial images
+    image: "/images/7.png",
     text: "Working with Pacifique was an incredible experience. His dedication to clean code and innovative solutions is unmatched. He consistently delivered high-quality work and was always willing to help team members.",
     rating: 5,
     date: "January 2024"
@@ -58,36 +58,29 @@ const testimonials = [
   }
 ];
 
-const TestimonialCard = ({ testimonial, isActive }) => {
+const TestimonialCard = ({ testimonial }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: isActive ? 1 : 0.3, scale: isActive ? 1 : 0.9 }}
-      transition={{ duration: 0.5 }}
-      className={`bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 ${
-        isActive ? '' : 'pointer-events-none'
-      }`}
-    >
+    <div className="flex-shrink-0 w-[350px] md:w-[400px] bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 mx-3">
       {/* Quote Icon */}
-      <div className="mb-6">
-        <FaQuoteLeft className="text-4xl text-primary-500/20" />
+      <div className="mb-4">
+        <FaQuoteLeft className="text-3xl text-primary-500/20" />
       </div>
 
       {/* Testimonial Text */}
-      <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6 italic">
+      <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4 italic line-clamp-4">
         "{testimonial.text}"
       </p>
 
       {/* Rating */}
-      <div className="flex gap-1 mb-6">
+      <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
-          <FaStar key={i} className="text-yellow-400 text-xl" />
+          <FaStar key={i} className="text-yellow-400 text-lg" />
         ))}
       </div>
 
       {/* Author Info */}
-      <div className="flex items-center gap-4">
-        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary-500">
+      <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary-500 flex-shrink-0">
           <Image
             src={testimonial.image}
             alt={testimonial.name}
@@ -95,11 +88,11 @@ const TestimonialCard = ({ testimonial, isActive }) => {
             className="object-cover"
           />
         </div>
-        <div>
-          <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+        <div className="flex-1 min-w-0">
+          <h4 className="text-base font-bold text-gray-900 dark:text-white truncate">
             {testimonial.name}
           </h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
             {testimonial.role}
           </p>
           <p className="text-xs text-primary-600 dark:text-primary-400">
@@ -107,37 +100,53 @@ const TestimonialCard = ({ testimonial, isActive }) => {
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  // Auto-scroll effect
+  const scrollRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Duplicate testimonials for infinite scroll
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000); // Change every 5 seconds
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
 
-    return () => clearInterval(interval);
-  }, []);
+    let animationId;
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5; // pixels per frame
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+    const animate = () => {
+      if (!isPaused && scrollContainer) {
+        scrollPosition += scrollSpeed;
+        
+        // Reset scroll position for infinite loop
+        const maxScroll = scrollContainer.scrollWidth / 3;
+        if (scrollPosition >= maxScroll) {
+          scrollPosition = 0;
+        }
+        
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+      animationId = requestAnimationFrame(animate);
+    };
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+    animationId = requestAnimationFrame(animate);
 
-  const goToTestimonial = (index) => {
-    setCurrentIndex(index);
-  };
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [isPaused]);
 
   return (
     <section id="testimonials" className="py-20 relative overflow-hidden">
@@ -163,91 +172,60 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Testimonial Carousel */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Main Testimonial */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -300 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              >
-                <TestimonialCard testimonial={testimonials[currentIndex]} isActive={true} />
-              </motion.div>
-            </AnimatePresence>
+        {/* Scrolling Testimonials Container */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Gradient Overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none"></div>
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-center items-center gap-4 mt-8">
-              <button
-                onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 border-2 border-primary-500 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg"
-                aria-label="Previous testimonial"
-              >
-                <FaChevronLeft />
-              </button>
+          {/* Scrolling Container */}
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-hidden py-4"
+            style={{ scrollBehavior: 'auto' }}
+          >
+            {duplicatedTestimonials.map((testimonial, index) => (
+              <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} />
+            ))}
+          </div>
+        </div>
 
-              {/* Dots Indicator */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentIndex
-                        ? 'bg-primary-500 w-8'
-                        : 'bg-gray-300 dark:bg-gray-600 hover:bg-primary-400'
-                    }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 border-2 border-primary-500 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg"
-                aria-label="Next testimonial"
-              >
-                <FaChevronRight />
-              </button>
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto"
+        >
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
+              {testimonials.length}+
+            </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
+              Recommendations
             </div>
           </div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-3 gap-6 mt-16"
-          >
-            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
-                {testimonials.length}+
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Recommendations
-              </div>
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
+              5.0
             </div>
-            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
-                5.0
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Average Rating
-              </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
+              Average Rating
             </div>
-            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
-                100%
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Would Recommend
-              </div>
+          </div>
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
+              100%
             </div>
-          </motion.div>
-        </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
+              Would Recommend
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
