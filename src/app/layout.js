@@ -8,6 +8,11 @@ export const metadata = {
   description: 'Portfolio of Mugisha Pacifique - Full-Stack Web Developer specializing in Next.js, React, AI, and innovative web solutions. Based in Rwanda.',
   keywords: 'Full-Stack Developer, Web Developer, AI Developer, Next.js, React, Node.js, Python, Rwanda, Mugisha Pacifique',
   authors: [{ name: 'Mugisha Pacifique' }],
+  icons: {
+    icon: '/briefcase.svg',
+    shortcut: '/briefcase.svg',
+    apple: '/briefcase.svg',
+  },
   openGraph: {
     title: 'Mugisha Pacifique | Full-Stack Developer',
     description: 'Passionate Full-Stack Developer building innovative solutions with Next.js, React, and AI',
