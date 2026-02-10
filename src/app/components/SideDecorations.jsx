@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp, FaBriefcase } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 
 const SideDecorations = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -26,10 +27,10 @@ const SideDecorations = () => {
             href="https://github.com/Pacifique5"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative w-12 h-12 rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg"
+            className="group relative w-12 h-12 rounded-lg bg-transparent flex items-center justify-center hover:scale-110 transition-all duration-300"
             title="GitHub"
           >
-            <FaGithub className="text-white text-xl" />
+            <FaGithub className="text-gray-800 dark:text-white text-2xl" />
             <span className="absolute left-full ml-3 px-3 py-1 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               GitHub
             </span>
@@ -39,10 +40,10 @@ const SideDecorations = () => {
             href="https://linkedin.com/in/mugisha-pacifique"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg"
+            className="group relative w-12 h-12 rounded-lg bg-transparent flex items-center justify-center hover:scale-110 transition-all duration-300"
             title="LinkedIn"
           >
-            <FaLinkedin className="text-white text-xl" />
+            <FaLinkedin className="text-[#0A66C2] text-2xl" />
             <span className="absolute left-full ml-3 px-3 py-1 bg-blue-700 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               LinkedIn
             </span>
@@ -50,10 +51,10 @@ const SideDecorations = () => {
           
           <a
             href="mailto:Pacifiquem58@gmail.com"
-            className="group relative w-12 h-12 rounded-lg bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg"
-            title="Email"
+            className="group relative w-12 h-12 rounded-lg bg-transparent flex items-center justify-center hover:scale-110 transition-all duration-300"
+            title="Gmail"
           >
-            <FaEnvelope className="text-white text-xl" />
+            <SiGmail className="text-[#EA4335] text-2xl" />
             <span className="absolute left-full ml-3 px-3 py-1 bg-red-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Email Me
             </span>
@@ -62,10 +63,19 @@ const SideDecorations = () => {
           {/* Decorative Line */}
           <div className="w-full h-px bg-gradient-to-r from-primary-500 to-transparent" />
           
-          {/* Location Badge */}
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white text-lg font-bold shadow-lg cursor-default" title="Based in Rwanda">
-            🇷🇼
-          </div>
+          {/* WhatsApp Badge */}
+          <a
+            href="https://wa.me/250795653123"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative w-12 h-12 rounded-lg bg-transparent flex items-center justify-center hover:scale-110 transition-all duration-300"
+            title="WhatsApp"
+          >
+            <FaWhatsapp className="text-[#25D366] text-2xl" />
+            <span className="absolute left-full ml-3 px-3 py-1 bg-green-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              WhatsApp Me
+            </span>
+          </a>
         </div>
       </div>
 
@@ -92,11 +102,11 @@ const SideDecorations = () => {
           {/* Quick Stats */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex flex-col items-center justify-center text-white shadow-lg cursor-default group relative"
+            className="w-12 h-12 rounded-lg bg-transparent flex flex-col items-center justify-center cursor-default group relative"
             title="Years of Experience"
           >
-            <span className="text-lg font-bold">5+</span>
-            <span className="text-[8px] leading-none">Years</span>
+            <span className="text-lg font-bold text-primary-600 dark:text-primary-400">5+</span>
+            <span className="text-[8px] leading-none text-gray-600 dark:text-gray-400">Years</span>
             <span className="absolute right-full mr-3 px-3 py-1 bg-primary-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Years Experience
             </span>
@@ -104,11 +114,11 @@ const SideDecorations = () => {
 
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary-500 to-secondary-600 flex flex-col items-center justify-center text-white shadow-lg cursor-default group relative"
+            className="w-12 h-12 rounded-lg bg-transparent flex flex-col items-center justify-center cursor-default group relative"
             title="Projects Completed"
           >
-            <span className="text-lg font-bold">25+</span>
-            <span className="text-[8px] leading-none">Projects</span>
+            <span className="text-lg font-bold text-secondary-600 dark:text-secondary-400">25+</span>
+            <span className="text-[8px] leading-none text-gray-600 dark:text-gray-400">Projects</span>
             <span className="absolute right-full mr-3 px-3 py-1 bg-secondary-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Projects Completed
             </span>
@@ -116,11 +126,11 @@ const SideDecorations = () => {
 
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent-purple to-accent-pink flex flex-col items-center justify-center text-white shadow-lg cursor-default group relative"
+            className="w-12 h-12 rounded-lg bg-transparent flex flex-col items-center justify-center cursor-default group relative"
             title="Certificates Earned"
           >
-            <span className="text-lg font-bold">25+</span>
-            <span className="text-[8px] leading-none">Certs</span>
+            <span className="text-lg font-bold text-accent-purple">25+</span>
+            <span className="text-[8px] leading-none text-gray-600 dark:text-gray-400">Certs</span>
             <span className="absolute right-full mr-3 px-3 py-1 bg-purple-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Certificates
             </span>
@@ -130,15 +140,23 @@ const SideDecorations = () => {
           <div className="w-full h-px bg-gradient-to-l from-accent-purple to-transparent" />
 
           {/* Availability Badge */}
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg cursor-default group relative">
-            <div className="relative">
-              <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
-              <div className="absolute inset-0 w-3 h-3 bg-white rounded-full animate-ping" />
-            </div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="w-12 h-12 rounded-lg bg-transparent flex items-center justify-center cursor-default group relative"
+            animate={{
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <FaBriefcase className="text-green-500 text-2xl" />
             <span className="absolute right-full mr-3 px-3 py-1 bg-green-600 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               Available for Work
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
 
